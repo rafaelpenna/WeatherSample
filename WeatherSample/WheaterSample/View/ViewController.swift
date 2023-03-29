@@ -19,7 +19,10 @@ class ViewController: UIViewController {
         screen.searchTextField.delegate = self
         weatherManager.delegate = self
         view.addSubview(searchPressed)
-        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.isNavigationBarHidden = true
     }
     
     lazy var searchPressed: UIButton = {

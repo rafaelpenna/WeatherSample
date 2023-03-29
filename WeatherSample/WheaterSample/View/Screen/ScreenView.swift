@@ -61,7 +61,7 @@ class ScreenView: UIView {
     lazy var temperatureLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "21C"
+        label.text = "21ºC"
         label.font = UIFont.systemFont(ofSize: 70)
         return label
     }()
@@ -103,17 +103,17 @@ class ScreenView: UIView {
             backgroundView.trailingAnchor.constraint(equalTo: trailingAnchor),
             backgroundView.bottomAnchor.constraint(equalTo: bottomAnchor),
             
-            localizationImage.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+            localizationImage.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 5),
             localizationImage.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             localizationImage.heightAnchor.constraint(equalToConstant: 30),
             localizationImage.widthAnchor.constraint(equalToConstant: 30),
             
-            searchTextField.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+            searchTextField.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 5),
             searchTextField.leadingAnchor.constraint(equalTo: localizationImage.trailingAnchor, constant: 25),
             searchTextField.trailingAnchor.constraint(equalTo: searchButton.leadingAnchor, constant: -25),
             searchTextField.heightAnchor.constraint(equalToConstant: 30),
             
-            searchButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+            searchButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 5),
             searchButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
             searchButton.heightAnchor.constraint(equalToConstant: 30),
             searchButton.widthAnchor.constraint(equalToConstant: 30),
