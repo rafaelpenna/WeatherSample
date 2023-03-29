@@ -6,12 +6,16 @@
 //
 
 import UIKit
+import CoreLocation
 
 class ViewController: UIViewController {
     
     let screen: ScreenView = ScreenView()
     
     var weatherManager = WeatherManager()
+    
+    
+    let locationManager = CLLocationManager()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,6 +23,12 @@ class ViewController: UIViewController {
         screen.searchTextField.delegate = self
         weatherManager.delegate = self
         view.addSubview(searchPressed)
+        view.addSubview(locationPressed)
+        
+        locationManager.delegate = self
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.requestLocation()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -32,6 +42,18 @@ class ViewController: UIViewController {
         button.addTarget(self, action: #selector(cityToSearch), for: .touchUpInside)
         return button
     }()
+    
+    lazy var locationPressed: UIButton = {
+        let button: UIButton = screen.localizationImage
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.isSelected = true
+        button.addTarget(self, action: #selector(coordinates), for: .touchUpInside)
+        return button
+    }()
+    
+    @objc func coordinates() {
+        locationManager.requestLocation()
+    }
 }
 
 //MARK: - UITextFieldDelegate
@@ -76,5 +98,22 @@ extension ViewController: WeatherManagerDelegate {
         print(error)
     }
     
+}
+
+//MARK: - CLLocationManagerDelegate
+
+extension ViewController: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let location = locations.last {
+            locationManager.stopUpdatingLocation()
+            let lat = location.coordinate.latitude
+            let lon = location.coordinate.longitude
+            weatherManager.fetchWeather(latitude: lat, longitude: lon)
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print(error)
+    }
 }
 

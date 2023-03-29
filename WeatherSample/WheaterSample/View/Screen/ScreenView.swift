@@ -26,13 +26,15 @@ class ScreenView: UIView {
         return image
     }()
     
-    lazy var localizationImage: UIImageView = {
-        let image = UIImageView()
-        image.translatesAutoresizingMaskIntoConstraints = false
-        image.image = UIImage(systemName: "location.circle.fill")
-        image.tintColor = .black
-        return image
-    }()
+    lazy var localizationImage: UIButton = {
+    let button = UIButton()
+    button.translatesAutoresizingMaskIntoConstraints = false
+    button.setImage(UIImage(systemName: "location.circle.fill"), for: .normal)
+    button.contentVerticalAlignment = .fill
+    button.contentHorizontalAlignment = .fill
+    button.tintColor = .black
+    return button
+}()
     
     lazy var searchTextField: UITextField = {
         let field = UITextField()
