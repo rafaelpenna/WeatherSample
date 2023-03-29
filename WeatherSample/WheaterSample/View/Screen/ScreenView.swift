@@ -26,39 +26,44 @@ class ScreenView: UIView {
         return image
     }()
     
-    lazy var localizationImage: UIImageView = {
-        let image = UIImageView()
-        image.translatesAutoresizingMaskIntoConstraints = false
-        image.image = UIImage(systemName: "location.circle.fill")
-        image.tintColor = .black
-        return image
-    }()
+    lazy var localizationImage: UIButton = {
+    let button = UIButton()
+    button.translatesAutoresizingMaskIntoConstraints = false
+    button.setImage(UIImage(systemName: "location.circle.fill"), for: .normal)
+    button.contentVerticalAlignment = .fill
+    button.contentHorizontalAlignment = .fill
+    button.tintColor = .black
+    return button
+}()
     
     lazy var searchTextField: UITextField = {
         let field = UITextField()
         field.translatesAutoresizingMaskIntoConstraints = false
         field.placeholder = "Search"
+        field.textAlignment = .right
         field.textColor = .white
-        field.becomeFirstResponder()
         field.layer.borderWidth = 0.8
         field.layer.borderColor = UIColor.black.cgColor
         field.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.1)
-        field.autocapitalizationType = .none
+        field.autocapitalizationType = .words
+        field.returnKeyType = .go
         return field
     }()
     
-    lazy var searchImage: UIImageView = {
-        let image = UIImageView()
-        image.translatesAutoresizingMaskIntoConstraints = false
-        image.image = UIImage(systemName: "magnifyingglass")
-        image.tintColor = .black
-        return image
+    lazy var searchButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(UIImage(systemName: "magnifyingglass"), for: .normal)
+        button.contentVerticalAlignment = .fill
+        button.contentHorizontalAlignment = .fill
+        button.tintColor = .black
+        return button
     }()
     
     lazy var temperatureLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "21C"
+        label.text = "21ºC"
         label.font = UIFont.systemFont(ofSize: 70)
         return label
     }()
@@ -86,7 +91,7 @@ class ScreenView: UIView {
         addSubview(backgroundView)
         addSubview(localizationImage)
         addSubview(searchTextField)
-        addSubview(searchImage)
+        addSubview(searchButton)
         addSubview(conditionalImage)
         addSubview(temperatureLabel)
         addSubview(cityLabel)
@@ -100,22 +105,22 @@ class ScreenView: UIView {
             backgroundView.trailingAnchor.constraint(equalTo: trailingAnchor),
             backgroundView.bottomAnchor.constraint(equalTo: bottomAnchor),
             
-            localizationImage.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: -25),
+            localizationImage.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 5),
             localizationImage.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             localizationImage.heightAnchor.constraint(equalToConstant: 30),
             localizationImage.widthAnchor.constraint(equalToConstant: 30),
             
-            searchTextField.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: -25),
+            searchTextField.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 5),
             searchTextField.leadingAnchor.constraint(equalTo: localizationImage.trailingAnchor, constant: 25),
-            searchTextField.trailingAnchor.constraint(equalTo: searchImage.leadingAnchor, constant: -25),
+            searchTextField.trailingAnchor.constraint(equalTo: searchButton.leadingAnchor, constant: -25),
             searchTextField.heightAnchor.constraint(equalToConstant: 30),
             
-            searchImage.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: -25),
-            searchImage.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
-            searchImage.heightAnchor.constraint(equalToConstant: 30),
-            searchImage.widthAnchor.constraint(equalToConstant: 30),
+            searchButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 5),
+            searchButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+            searchButton.heightAnchor.constraint(equalToConstant: 30),
+            searchButton.widthAnchor.constraint(equalToConstant: 30),
             
-            conditionalImage.topAnchor.constraint(equalTo: searchImage.bottomAnchor, constant: 25),
+            conditionalImage.topAnchor.constraint(equalTo: searchButton.bottomAnchor, constant: 25),
             conditionalImage.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
             conditionalImage.heightAnchor.constraint(equalToConstant: 80),
             conditionalImage.widthAnchor.constraint(equalToConstant: 100),
